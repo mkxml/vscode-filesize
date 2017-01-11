@@ -1,0 +1,45 @@
+{
+  "name": "vscode-filesize",
+  "displayName": "filesize",
+  "description": "Show the current file size in the status bar",
+  "version": "1.0.0",
+  "publisher": "mkxml",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mkxml/vscode-filesize"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.showDetailedFilesizeInfo",
+        "title": "Show filesize detailed information"
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.0",
+    "mocha": "^2.3.3",
+    "eslint": "^3.6.0",
+    "@types/node": "^6.0.40",
+    "@types/mocha": "^2.2.32"
+  },
+  "dependencies": {
+    "filesize-calculator": "^1.0.0"
+  }
+}
