@@ -22,10 +22,26 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.showDetailedFilesizeInfo",
+        "command": "extension.showFilesizeInfo",
         "title": "Show filesize detailed information"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "filesize configuration",
+      "properties": {
+        "filesize.useKibibyteRepresentation": {
+          "type": "boolean",
+          "default": true,
+          "description": "Defaults to true, using IEC's representation. Set to false to get SI representation."
+        },
+        "filesize.use24HourFormat": {
+          "type": "boolean",
+          "default": true,
+          "description": "Defaults to true, using 24-hour format. Set to false to get 12-hour format."
+        }
+      }
+    }
   },
   "scripts": {
     "postinstall": "node ./node_modules/vscode/bin/install",
