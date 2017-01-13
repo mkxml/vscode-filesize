@@ -8,6 +8,14 @@
     "type": "git",
     "url": "https://github.com/mkxml/vscode-filesize"
   },
+  "keywords": [
+    "file",
+    "size",
+    "filesize",
+    "status bar",
+    "info",
+    "gzip"
+  ],
   "license": "MIT",
   "engines": {
     "vscode": "^1.5.0"
