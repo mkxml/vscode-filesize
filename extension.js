@@ -1,47 +1,158 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 var vscode = require('vscode');
+var renderTableInOutputChannel = require('./view');
+var fzCalculator = require('filesize-calculator');
 
 var window = vscode.window;
+var workspace = vscode.workspace;
 
-var item;
+var statusBarItem, oc, info, config, isShowingDetailedInfo;
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+function updateConfig() {
+  var configuration = workspace.getConfiguration('filesize');
+  config = {
+    useKibibyteRepresentation: configuration.get('useKibibyteRepresentation'),
+    use24HourFormat: configuration.get('use24HourFormat')
+  };
+  updateStatusBarItem();
+  return config;
+}
+
+function showStatusBarItem(newInfo) {
+  info = fzCalculator.addPrettySize(newInfo, config);
+  if (info && info.prettySize) {
+    statusBarItem.text = info.prettySize;
+    statusBarItem.show();
+  }
+}
+
+function hideStatusBarItem(event, force) {
+  try {
+    var currentEditor = window.activeTextEditor._documentData._document;
+    if (force || (event && event.fileName === currentEditor.fileName)) {
+      oc.hide();
+      statusBarItem.text = '';
+      statusBarItem.hide();
+    }
+  } catch (e) { }
+}
+
+// Update simple info in the status bar
+function updateStatusBarItem() {
+  try {
+    var currentEditor = window.activeTextEditor._documentData._document;
+    if (currentEditor && currentEditor.uri.scheme === 'file') {
+      fzCalculator.loadFileInfoAsync(currentEditor.fileName)
+        .then(showStatusBarItem)
+        .catch(hideStatusBarItem);
+    } else {
+      hideStatusBarItem(null, true);
+    }
+  } catch (e) {
+    hideStatusBarItem(null, true);
+  }
+}
+
+// Show detailed filesize info in the OC
+function showDetailedInfo() {
+  if (info && info.prettySize) {
+    info = fzCalculator.addGzipSize(info, config);
+    info = fzCalculator.addMimeTypeInfo(info);
+    info = fzCalculator.addPrettyDateInfo(info, config);
+    renderTableInOutputChannel(oc, [
+      {
+        header: 'Size',
+        content: info.prettySize
+      },
+      {
+        header: 'Gzipped',
+        content: info.gzipSize
+      },
+      {
+        header: 'Mime type',
+        content: info.mimeType
+      },
+      {
+        header: 'Created',
+        content: info.prettyDateCreated
+      },
+      {
+        header: 'Changed',
+        content: info.prettyDateChanged
+      }
+    ]);
+  } else {
+    oc.clear();
+    oc.appendLine('No file information available for this context!');
+  }
+  oc.show(true);
+  isShowingDetailedInfo = true;
+}
+
+function toggleDetailedInfo() {
+  if (isShowingDetailedInfo) {
+    oc.hide();
+    isShowingDetailedInfo = false;
+  } else {
+    showDetailedInfo();
+  }
+}
+
+// Called when VS Code activates the extension
 function activate(context) {
-    console.log('Congratulations, your extension "filesize" is now active!');
+  console.log('filesize is active');
 
-    var disposable = vscode.commands.registerCommand('extension.showDetailedFilesizeInfo', function () {
+  // Set up statusBarItem
+  statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Left);
+  statusBarItem.command = 'extension.toggleInfo';
+  statusBarItem.tooltip = 'Current file size - Click to toggle more info';
 
-        // Test out outputChannel, supports only strings :(
-        var oc = window.createOutputChannel('filesize');
-        oc.appendLine('+--------------------------------------------------------------+');
-        oc.appendLine('| Size         | 1139.89 KB                                    |');
-        oc.appendLine('|--------------------------------------------------------------|');
-        oc.appendLine('| Gzipped      | 1000.89 KB                                    |');
-        oc.appendLine('|--------------------------------------------------------------|');
-        oc.appendLine('| Mime type    | image/jpeg                                    |');
-        oc.appendLine('|--------------------------------------------------------------|');
-        oc.appendLine('| Created      | December, 29th, 2016 07:00 AM                 |');
-        oc.appendLine('|--------------------------------------------------------------|');
-        oc.appendLine('| Changed      | January, 29th, 2016 08:00 AM                  |');
-        oc.appendLine('|--------------------------------------------------------------|');
-        oc.appendLine('| Dimmensions  | 640x640                                       |');
-        oc.appendLine('+--------------------------------------------------------------+');
-        oc.show(true);
+  // Global OutputChannel to be used for the extension detailed info
+  oc = window.createOutputChannel('filesize');
 
-    });
+  // Update handlers
+  var onOpen = workspace.onDidOpenTextDocument(updateStatusBarItem);
+  var onClose = workspace.onDidCloseTextDocument(hideStatusBarItem);
+  var onSave = workspace.onDidSaveTextDocument(updateStatusBarItem);
+  var onChangeConfig = workspace.onDidChangeConfiguration(updateConfig);
 
-    context.subscriptions.push(disposable);
+  // Toggle detailed info when clicking the status bar item
+  var clickEvent = vscode.commands.registerCommand('extension.toggleInfo', toggleDetailedInfo);
 
-    item = window.createStatusBarItem(vscode.StatusBarAlignment.Left);
-    item.text = 'Click Me!';
-    item.command = 'extension.showDetailedFilesizeInfo';
-    item.show();
+  // Show detailed info through custom command
+  var command = vscode.commands.registerCommand('extension.showFilesizeInfo', showDetailedInfo);
+
+  // Register disposables that get disposed when deactivating
+  context.subscriptions.push(onOpen);
+  context.subscriptions.push(onClose);
+  context.subscriptions.push(onSave);
+  context.subscriptions.push(onChangeConfig);
+  context.subscriptions.push(clickEvent);
+  context.subscriptions.push(command);
+
+  // Set default config
+  updateConfig();
+
+  // First update
+  updateStatusBarItem();
 }
-exports.activate = activate;
 
-// this method is called when your extension is deactivated
+// Called when VS Code deactivates the extension
 function deactivate() {
+  if (oc) {
+    oc.clear();
+    oc.dispose();
+  }
+  if (statusBarItem) {
+    statusBarItem.hide();
+    statusBarItem.dispose();
+  }
+  oc = null;
+  statusBarItem = null;
+  config = null;
+  info = null;
 }
-exports.deactivate = deactivate;
+
+module.exports = {
+  activate: activate,
+  deactivate: deactivate
+};
