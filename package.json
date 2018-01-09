@@ -2,7 +2,7 @@
   "name": "vscode-filesize",
   "displayName": "filesize",
   "description": "Show the current file size in the status bar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "mkxml",
   "repository": {
     "type": "git",
@@ -13,8 +13,7 @@
     "size",
     "filesize",
     "status bar",
-    "info",
-    "gzip"
+    "info"
   ],
   "license": "MIT",
   "engines": {
