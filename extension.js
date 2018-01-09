@@ -108,6 +108,7 @@ function activate(context) {
   var onOpen = workspace.onDidOpenTextDocument(updateStatusBarItem);
   var onClose = workspace.onDidCloseTextDocument(hideStatusBarItem);
   var onSave = workspace.onDidSaveTextDocument(updateStatusBarItem);
+  var onActiveEditorChanged = window.onDidChangeActiveTextEditor(updateStatusBarItem);
   var onChangeConfig = workspace.onDidChangeConfiguration(updateConfig);
 
   // Toggle detailed info when clicking the status bar item
@@ -121,6 +122,7 @@ function activate(context) {
   context.subscriptions.push(onClose);
   context.subscriptions.push(onSave);
   context.subscriptions.push(onChangeConfig);
+  context.subscriptions.push(onActiveEditorChanged);
   context.subscriptions.push(clickEvent);
   context.subscriptions.push(command);
 
