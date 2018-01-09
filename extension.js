@@ -2,6 +2,8 @@ var vscode = require('vscode');
 var renderTableInOutputChannel = require('./view');
 var fzCalculator = require('filesize-calculator');
 
+var filesizeQuery = null; // Cache file info queries to cancel
+
 var window = vscode.window;
 var workspace = vscode.workspace;
 
@@ -35,14 +37,16 @@ function hideStatusBarItem() {
 function updateStatusBarItem() {
   try {
     var currentEditor = window.activeTextEditor._documentData._document;
+    if (filesizeQuery !== null) filesizeQuery.cancel();
     if (currentEditor && currentEditor.uri.scheme === 'file') {
-      fzCalculator.loadFileInfoAsync(currentEditor.fileName)
+      filesizeQuery = fzCalculator.loadFileInfoAsync(currentEditor.fileName)
         .then(showStatusBarItem)
         .catch(hideStatusBarItem);
     } else {
       hideStatusBarItem();
     }
   } catch (e) {
+    if (filesizeQuery !== null) filesizeQuery.cancel();
     hideStatusBarItem();
   }
 }
