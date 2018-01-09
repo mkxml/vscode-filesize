@@ -105,7 +105,6 @@ function activate(context) {
   oc = window.createOutputChannel('filesize');
 
   // Update handlers
-  var onOpen = workspace.onDidOpenTextDocument(updateStatusBarItem);
   var onClose = workspace.onDidCloseTextDocument(hideStatusBarItem);
   var onSave = workspace.onDidSaveTextDocument(updateStatusBarItem);
   var onActiveEditorChanged = window.onDidChangeActiveTextEditor(updateStatusBarItem);
@@ -118,7 +117,6 @@ function activate(context) {
   var command = vscode.commands.registerCommand('extension.showFilesizeInfo', showDetailedInfo);
 
   // Register disposables that get disposed when deactivating
-  context.subscriptions.push(onOpen);
   context.subscriptions.push(onClose);
   context.subscriptions.push(onSave);
   context.subscriptions.push(onChangeConfig);
