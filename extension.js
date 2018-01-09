@@ -25,15 +25,10 @@ function showStatusBarItem(newInfo) {
   }
 }
 
-function hideStatusBarItem(event, force) {
-  try {
-    var currentEditor = window.activeTextEditor._documentData._document;
-    if (force || (event && event.fileName === currentEditor.fileName)) {
-      oc.hide();
-      statusBarItem.text = '';
-      statusBarItem.hide();
-    }
-  } catch (e) { }
+function hideStatusBarItem() {
+  oc.hide();
+  statusBarItem.text = '';
+  statusBarItem.hide();
 }
 
 // Update simple info in the status bar
@@ -45,10 +40,10 @@ function updateStatusBarItem() {
         .then(showStatusBarItem)
         .catch(hideStatusBarItem);
     } else {
-      hideStatusBarItem(null, true);
+      hideStatusBarItem();
     }
   } catch (e) {
-    hideStatusBarItem(null, true);
+    hideStatusBarItem();
   }
 }
 
