@@ -133,9 +133,6 @@ function activate(context) {
 
   // Set default config
   updateConfig();
-
-  // First update
-  updateStatusBarItem();
 }
 
 // Called when VS Code deactivates the extension
