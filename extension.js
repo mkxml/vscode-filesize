@@ -35,6 +35,7 @@ function hideStatusBarItem() {
 
 // Update simple info in the status bar
 function updateStatusBarItem() {
+  hideDetailedInfo();
   try {
     var currentEditor = window.activeTextEditor._documentData._document;
     if (filesizeQuery !== null) filesizeQuery.cancel();
@@ -87,10 +88,14 @@ function showDetailedInfo() {
   isShowingDetailedInfo = true;
 }
 
+function hideDetailedInfo() {
+  oc.hide();
+  isShowingDetailedInfo = false;
+}
+
 function toggleDetailedInfo() {
   if (isShowingDetailedInfo) {
-    oc.hide();
-    isShowingDetailedInfo = false;
+    hideDetailedInfo();
   } else {
     showDetailedInfo();
   }
