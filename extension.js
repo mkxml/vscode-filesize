@@ -106,7 +106,7 @@ function activate(context) {
   console.log('filesize is active');
 
   // Set up statusBarItem
-  statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Left);
+  statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
   statusBarItem.command = 'extension.toggleInfo';
   statusBarItem.tooltip = 'Current file size - Click to toggle more info';
 
