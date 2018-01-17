@@ -3,6 +3,7 @@
   "displayName": "filesize",
   "description": "Show the current file size in the status bar",
   "version": "1.1.0",
+  "icon": "icon.png",
   "publisher": "mkxml",
   "repository": {
     "type": "git",
