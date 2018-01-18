@@ -58,28 +58,13 @@ function showDetailedInfo() {
     info = fzCalculator.addGzipSize(info, config);
     info = fzCalculator.addMimeTypeInfo(info);
     info = fzCalculator.addPrettyDateInfo(info, config);
-    renderTableInOutputChannel(oc, [
-      {
-        header: 'Size',
-        content: info.prettySize
-      },
-      {
-        header: 'Gzipped',
-        content: info.gzipSize
-      },
-      {
-        header: 'Mime type',
-        content: info.mimeType
-      },
-      {
-        header: 'Created',
-        content: info.prettyDateCreated
-      },
-      {
-        header: 'Changed',
-        content: info.prettyDateChanged
-      }
-    ]);
+    const table = [];
+    if (info.prettySize) table.push({ header: 'Size', content: info.prettySize });
+    if (info.gzipSize) table.push({ header: 'Gzipped', content: info.gzipSize });
+    if (info.mimeType) table.push({ header: 'Mime type', content: info.mimeType });
+    if (info.prettyDateCreated) table.push({ header: 'Created', content: info.prettyDateCreated });
+    if (info.prettyDateChanged) table.push({ header: 'Changed', content: info.prettyDateChanged });
+    renderTableInOutputChannel(oc, table);
   } else {
     oc.clear();
     oc.appendLine('No file information available for this context!');
