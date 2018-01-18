@@ -22,9 +22,13 @@ function formatColumn(text, maxChars, first) {
 }
 
 // Render a human readable table in OC by passing the OC and header: content
-function renderTableInOutputChannel(outputChannel, data) {
+function renderTableInOutputChannel(outputChannel, title, data) {
   // Make sure it's clean
   outputChannel.clear();
+
+  // Title, file path
+  if (title) outputChannel.appendLine(title + '\n');
+
   // Start table
   outputChannel.appendLine(VERTICAL_BORDER);
 
