@@ -30,8 +30,16 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.showFilesizeInfo",
-        "title": "Show filesize detailed information"
+        "command": "extension.toggleFilesizeInfo",
+        "title": "Toggle filesize detailed information"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.toggleFilesizeInfo",
+        "key": "ctrl+shift+i",
+        "mac": "cmd+shift+i",
+        "when": "editorTextFocus"
       }
     ],
     "configuration": {
