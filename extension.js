@@ -29,23 +29,23 @@ function showStatusBarItem(newInfo) {
 }
 
 function hideStatusBarItem() {
-  oc.hide();
+  hideDetailedInfo();
   statusBarItem.text = '';
   statusBarItem.hide();
 }
 
 // Update simple info in the status bar
 function updateStatusBarItem() {
-  hideDetailedInfo();
   try {
     var currentEditor = window.activeTextEditor._documentData._document;
     if (filesizeQuery !== null) filesizeQuery.cancel();
     if (currentEditor && currentEditor.uri.scheme === 'file') {
+      hideDetailedInfo();
       filesizeQuery = fzCalculator.loadFileInfoAsync(currentEditor.fileName)
         .then(showStatusBarItem)
         .catch(hideStatusBarItem);
     } else {
-      hideStatusBarItem();
+      if (currentEditor.uri.scheme !== 'output') hideStatusBarItem();
     }
   } catch (e) {
     if (filesizeQuery !== null) filesizeQuery.cancel();
