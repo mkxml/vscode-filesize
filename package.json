@@ -46,10 +46,10 @@
       "type": "object",
       "title": "filesize configuration",
       "properties": {
-        "filesize.useKibibyteRepresentation": {
+        "filesize.useDecimal": {
           "type": "boolean",
-          "default": true,
-          "description": "Defaults to true, using IEC's representation. Set to false to get SI representation."
+          "default": false,
+          "description": "Defaults to false, using IEC's representation. Set to false to get SI representation."
         },
         "filesize.use24HourFormat": {
           "type": "boolean",

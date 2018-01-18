@@ -12,7 +12,7 @@ var statusBarItem, oc, info, config, isShowingDetailedInfo;
 function updateConfig() {
   var configuration = workspace.getConfiguration('filesize');
   config = {
-    useKibibyteRepresentation: configuration.get('useKibibyteRepresentation'),
+    useDecimal: configuration.get('useDecimal'),
     use24HourFormat: configuration.get('use24HourFormat'),
     showGzip: configuration.get('showGzip')
   };
