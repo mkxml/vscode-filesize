@@ -59,6 +59,7 @@ function showDetailedInfo() {
     info = fzCalculator.addMimeTypeInfo(info);
     info = fzCalculator.addPrettyDateInfo(info, config);
     const table = [];
+    if (info.absolutePath) table.push({ header: 'Path', content: info.absolutePath });
     if (info.prettySize) table.push({ header: 'Size', content: info.prettySize });
     if (info.gzipSize) table.push({ header: 'Gzipped', content: info.gzipSize });
     if (info.mimeType) table.push({ header: 'Mime type', content: info.mimeType });
