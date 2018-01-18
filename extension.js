@@ -107,7 +107,7 @@ function activate(context) {
 
   // Set up statusBarItem
   statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
-  statusBarItem.command = 'extension.toggleInfo';
+  statusBarItem.command = 'extension.toggleFilesizeInfo';
   statusBarItem.tooltip = 'Current file size - Click to toggle more info';
 
   // Global OutputChannel to be used for the extension detailed info
@@ -118,17 +118,13 @@ function activate(context) {
   var onActiveEditorChanged = window.onDidChangeActiveTextEditor(updateStatusBarItem);
   var onChangeConfig = workspace.onDidChangeConfiguration(updateConfig);
 
-  // Toggle detailed info when clicking the status bar item
-  var clickEvent = vscode.commands.registerCommand('extension.toggleInfo', toggleDetailedInfo);
-
   // Show detailed info through custom command
-  var command = vscode.commands.registerCommand('extension.showFilesizeInfo', showDetailedInfo);
+  var command = vscode.commands.registerCommand('extension.toggleFilesizeInfo', toggleDetailedInfo);
 
   // Register disposables that get disposed when deactivating
   context.subscriptions.push(onSave);
   context.subscriptions.push(onChangeConfig);
   context.subscriptions.push(onActiveEditorChanged);
-  context.subscriptions.push(clickEvent);
   context.subscriptions.push(command);
 
   // Set default config
