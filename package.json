@@ -55,6 +55,11 @@
           "type": "boolean",
           "default": true,
           "description": "Defaults to true, using 24-hour format. Set to false to get 12-hour format."
+        },
+        "filesize.showGzip": {
+          "type": "boolean",
+          "default": true,
+          "description": "Defaults to true, whether to show gzip size in detailed view or not."
         }
       }
     }

@@ -13,7 +13,8 @@ function updateConfig() {
   var configuration = workspace.getConfiguration('filesize');
   config = {
     useKibibyteRepresentation: configuration.get('useKibibyteRepresentation'),
-    use24HourFormat: configuration.get('use24HourFormat')
+    use24HourFormat: configuration.get('use24HourFormat'),
+    showGzip: configuration.get('showGzip')
   };
   updateStatusBarItem();
   return config;
@@ -55,7 +56,7 @@ function updateStatusBarItem() {
 // Show detailed filesize info in the OC
 function showDetailedInfo() {
   if (info && info.prettySize) {
-    info = fzCalculator.addGzipSize(info, config);
+    info = config.showGzip ? fzCalculator.addGzipSize(info, config) : info;
     info = fzCalculator.addMimeTypeInfo(info);
     info = fzCalculator.addPrettyDateInfo(info, config);
     const table = [];
