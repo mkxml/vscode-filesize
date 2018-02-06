@@ -15,19 +15,22 @@ Or you can just search for `filesize` in the extension search bar inside the edi
 `filesize` with the status bar component active:
 
 ![status bar component](https://cldup.com/_Y52O-UfkK.jpg)
-
+ 
 ### Detailed view
+
+To open the detailed view for the current file in focus you can just click at the size in the status bar or use `Crtl`-`shift`-`i` or `Cmd`-`shift`-`i` if you are on a Mac.
 
 `filesize` with the detailed info panel open:
 
-![detailed info](https://cldup.com/jznOci4OIP.jpg)
+![detailed info](https://cldup.com/x6qsyVLtee.jpg)
 
 ## Settings
 
 This package has two user configurable settings:
 
-- `useKibibyteRepresentation`: set to `true` if you want your size data to be displayed according to [IEC's](https://en.wikipedia.org/wiki/Binary_prefix) format (default), set to `false` if you want it to be displayed in the [SI unit system](https://en.wikipedia.org/wiki/International_System_of_Units).
-- `use24HourFormat`: set to `true` to use the 24-hour clock, set to `false` to use the 12-hour clock.
+- `useDecimal`: set to `true` if you want your size data to be displayed according to the [SI unit system](https://en.wikipedia.org/wiki/International_System_of_Units) or leave it at `false` to use [IEC's](https://en.wikipedia.org/wiki/Binary_prefix) format (default).
+- `use24HourFormat`: set to `true` to use the 24-hour clock, set to `false` to use the 12-hour clock. Default is `true`.
+- `showGzip`: set to `true` to show calculated gzip size in the detailed info view. Default is `true`.
 
 ## Contributing
 
