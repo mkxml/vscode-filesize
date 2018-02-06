@@ -77,6 +77,6 @@
     "@types/mocha": "^2.2.32"
   },
   "dependencies": {
-    "filesize-calculator": "^3.0.0"
+    "filesize-calculator": "^3.1.0"
   }
 }
