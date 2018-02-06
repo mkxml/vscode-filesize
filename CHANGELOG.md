@@ -1,3 +1,11 @@
+## 2.0.0 - Quicker, keyboard shortcut, absolute file info, new icon and more
+- Extension now has an icon thanks to @coliff!
+- Absolute file info now shows in the detailed view.
+- Keyboard shortcut to toggle detailed view is now available. See README.
+- Added `showGzip` config to enable toggling gzip info in detailed view.
+- Changed `useKibibyteRepresentation` config to `useDecimal`, now set to `false` by default.
+- Slightly faster code and bug fixes.
+
 ## 1.1.0 - Panel support and some fixes
 - **Panel support!** Now the extension should have no problems dealing with more than one panel in screen. The focused one is considered active.
 - Status bar element now keeps its place. Some users were experiencing problems when there were other
