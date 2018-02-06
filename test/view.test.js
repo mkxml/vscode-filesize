@@ -12,18 +12,18 @@ var oc = {
 
 suite('View', function () {
   test('can render a table with header and a single item', function () {
-    var expected = '';
+    var expected = '/home/mypath\n\n';
     expected += '+--------------------------------------------------------------+\n';
     expected += '| Size         | 20 bytes                                      |\n';
     expected += '+--------------------------------------------------------------+\n';
-    view(oc, [{
+    view(oc, '/home/mypath', [{
       header: 'Size',
       content: '20 bytes'
     }]);
     assert.equal(oc.content, expected);
   });
   test('can render a table with many items', function () {
-    var expected = '';
+    var expected = '/home/mypath\n\n';
     expected += '+--------------------------------------------------------------+\n';
     expected += '| Size         | 20 bytes                                      |\n';
     expected += '|--------------------------------------------------------------|\n';
@@ -35,7 +35,7 @@ suite('View', function () {
     expected += '|--------------------------------------------------------------|\n';
     expected += '| Changed      | January 13th 2017, 09:59:17                   |\n';
     expected += '+--------------------------------------------------------------+\n';
-    view(oc, [
+    view(oc, '/home/mypath', [
       {
         header: 'Size',
         content: '20 bytes'
