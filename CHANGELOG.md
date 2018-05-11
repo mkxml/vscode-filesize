@@ -1,3 +1,6 @@
+## 2.1.0 - Changed keyboard shortcut, updates dependencies
+- We have a new keyboard shortcut for opening detailed info (Ctrl+Shift+') on Windows/Linux and (Cmd+Shift+') on Mac. Thanks @gonssal for the heads up!
+- Updated dependencies
 ## 2.0.0 - Quicker, keyboard shortcut, absolute file info, new icon and more
 - Extension now has an icon thanks to @coliff!
 - Absolute file info now shows in the detailed view.
