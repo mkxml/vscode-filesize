@@ -18,7 +18,7 @@ Or you can just search for `filesize` in the extension search bar inside the edi
  
 ### Detailed view
 
-To open the detailed view for the current file in focus you can just click at the size in the status bar or use `Crtl`-`shift`-`i` or `Cmd`-`shift`-`i` if you are on a Mac.
+To open the detailed view for the current file in focus you can just click at the size in the status bar or use `Crtl`-`shift`-`'` or `Cmd`-`shift`-`'` if you are on a Mac.
 
 `filesize` with the detailed info panel open:
 

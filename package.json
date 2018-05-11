@@ -37,8 +37,8 @@
     "keybindings": [
       {
         "command": "extension.toggleFilesizeInfo",
-        "key": "ctrl+shift+i",
-        "mac": "cmd+shift+i",
+        "key": "ctrl+shift+'",
+        "mac": "cmd+shift+'",
         "when": "editorTextFocus"
       }
     ],
