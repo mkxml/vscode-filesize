@@ -49,7 +49,7 @@
         "filesize.useDecimal": {
           "type": "boolean",
           "default": false,
-          "description": "Defaults to false, using IEC's representation. Set to false to get SI representation."
+          "description": "Defaults to false, using IEC's representation. Set to true to get SI representation."
         },
         "filesize.use24HourFormat": {
           "type": "boolean",
