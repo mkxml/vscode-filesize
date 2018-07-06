@@ -1,3 +1,6 @@
+## 2.1.1 - Fixed useDecimal comment and updates dependencies
+- useDecimal comment is now indicating the use of the boolean config correctly. Thanks to @matthewfarlymn!
+- Updated dependencies.
 ## 2.1.0 - Changed keyboard shortcut, updates dependencies
 - We have a new keyboard shortcut for opening detailed info (Ctrl+Shift+') on Windows/Linux and (Cmd+Shift+') on Mac. Thanks @gonssal for the heads up!
 - Updated dependencies
