@@ -21,7 +21,7 @@ function updateConfig() {
 function showStatusBarItem(newInfo) {
   info = fzCalculator.addPrettySize(newInfo, config);
   if (info && info.prettySize) {
-    statusBarItem.text = info.prettySize;
+    statusBarItem.text = info.prettySize + ' / ' + newInfo.lineCount + ' lines';
     statusBarItem.show();
   }
 }
@@ -37,8 +37,11 @@ function updateStatusBarItem() {
   try {
     var currentEditor = window.activeTextEditor._documentData._document;
     if (currentEditor && currentEditor.uri.scheme === 'file') {
+      var fileInfo = fzCalculator.loadFileInfoSync(currentEditor.fileName);
+      fileInfo.lineCount = currentEditor.lineCount;
+
       hideDetailedInfo();
-      showStatusBarItem(fzCalculator.loadFileInfoSync(currentEditor.fileName));
+      showStatusBarItem(fileInfo);
     } else {
       if (currentEditor.uri.scheme !== 'output') hideStatusBarItem();
     }
