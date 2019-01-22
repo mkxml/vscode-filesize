@@ -1,3 +1,5 @@
+## 2.1.2 - Updated dependencies
+- Updated dependencies
 ## 2.1.1 - Fixed useDecimal comment and updates dependencies
 - useDecimal comment is now indicating the use of the boolean config correctly. Thanks to @matthewfarlymn!
 - Updated dependencies.
