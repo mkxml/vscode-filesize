@@ -60,7 +60,12 @@
           "type": "boolean",
           "default": true,
           "description": "Defaults to true, whether to show gzip size in detailed view or not."
-        }
+        },
+        "filesize.showGzipInStatusBar": {
+					"type": "boolean",
+					"default": false,
+					"description": "Defaults to false, whether to show gzip size in the status bar."
+				}
       }
     }
   },
