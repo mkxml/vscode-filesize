@@ -1,3 +1,5 @@
+## 2.1.3 - Updated dependencies
+- Updated dependencies
 ## 2.1.2 - Updated dependencies
 - Updated dependencies
 ## 2.1.1 - Fixed useDecimal comment and updates dependencies
