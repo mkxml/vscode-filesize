@@ -69,12 +69,12 @@
     "test": "node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
-    "typescript": "^3.4.5",
-    "vscode": "^1.1.34",
-    "mocha": "^6.1.4",
-    "eslint": "^5.16.0",
-    "@types/node": "^12.0.2",
-    "@types/mocha": "^5.2.6"
+    "typescript": "^3.7.3",
+    "vscode": "^1.1.36",
+    "mocha": "^6.2.2",
+    "eslint": "^6.7.2",
+    "@types/node": "^12.12.17",
+    "@types/mocha": "^5.2.7"
   },
   "dependencies": {
     "filesize-calculator": "^3.1.4"
