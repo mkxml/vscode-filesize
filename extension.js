@@ -12,7 +12,8 @@ function updateConfig() {
   config = {
     useDecimal: configuration.get('useDecimal'),
     use24HourFormat: configuration.get('use24HourFormat'),
-    showGzip: configuration.get('showGzip')
+    showGzip: configuration.get('showGzip'),
+    showBrotli: configuration.get('showBrotli')
   };
   updateStatusBarItem();
   return config;
@@ -51,11 +52,13 @@ function updateStatusBarItem() {
 function showDetailedInfo() {
   if (info && info.prettySize) {
     info = config.showGzip ? fzCalculator.addGzipSize(info, config) : info;
+    info = config.showBrotli ? fzCalculator.addBrotliSize(info, config) : info;
     info = fzCalculator.addMimeTypeInfo(info);
     info = fzCalculator.addPrettyDateInfo(info, config);
     const table = [];
     if (info.prettySize) table.push({ header: 'Size', content: info.prettySize });
     if (info.gzipSize) table.push({ header: 'Gzipped', content: info.gzipSize });
+    if (info.brotliSize) table.push({ header: 'Brotli', content: info.brotliSize });
     if (info.mimeType) table.push({ header: 'Mime type', content: info.mimeType });
     if (info.prettyDateCreated) table.push({ header: 'Created', content: info.prettyDateCreated });
     if (info.prettyDateChanged) table.push({ header: 'Changed', content: info.prettyDateChanged });
