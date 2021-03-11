@@ -41,7 +41,7 @@ function hideStatusBarItem() {
 // Update simple info in the status bar
 function updateStatusBarItem() {
   try {
-    var currentEditor = window.activeTextEditor._documentData._document;
+    var currentEditor = window.activeTextEditor.document;
     if (currentEditor && currentEditor.uri.scheme === 'file') {
       hideDetailedInfo();
       showStatusBarItem(fzCalculator.loadFileInfoSync(currentEditor.fileName));
