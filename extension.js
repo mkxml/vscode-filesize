@@ -29,7 +29,7 @@ function showStatusBarItem(newInfo) {
   if (info && info.prettySize) {
     statusBarItem.text = info.prettySize;
     if (config.showGzipInStatusBar) {
-      statusBarItem.text = `Min: ${info.prettySize}`;
+      statusBarItem.text = `Raw: ${info.prettySize}`;
       info = fzCalculator.addGzipSize(info, config);
       statusBarItem.text += ` | Gzip: ${info.gzipSize}`
     }
