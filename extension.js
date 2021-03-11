@@ -5,6 +5,8 @@ var fzCalculator = require('filesize-calculator');
 var window = vscode.window;
 var workspace = vscode.workspace;
 
+var cachedLocation = 'left';
+
 var statusBarItem, oc, info, config, isShowingDetailedInfo;
 
 function updateConfig() {
@@ -13,7 +15,8 @@ function updateConfig() {
     useDecimal: configuration.get('useDecimal'),
     use24HourFormat: configuration.get('use24HourFormat'),
     showGzip: configuration.get('showGzip'),
-    showGzipInStatusBar: configuration.get('showGzipInStatusBar')
+    showGzipInStatusBar: configuration.get('showGzipInStatusBar'),
+    displayInfoOnTheRightSideOfStatusBar: configuration.get('displayInfoOnTheRightSideOfStatusBar')
   };
   updateStatusBarItem();
   return config;
@@ -40,6 +43,19 @@ function hideStatusBarItem() {
 
 // Update simple info in the status bar
 function updateStatusBarItem() {
+  // Check where to display the status bar
+  var location = config.displayInfoOnTheRightSideOfStatusBar ? 'right' : 'left';
+  // Set up statusBarItem
+  if (cachedLocation !== location) {
+    cachedLocation = location;
+    if (location === 'right') {
+      statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Right, 1);
+    } else {
+      statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
+    }
+    statusBarItem.command = 'extension.toggleFilesizeInfo';
+    statusBarItem.tooltip = 'Current file size - Click to toggle more info';
+  }
   try {
     var currentEditor = window.activeTextEditor.document;
     if (currentEditor && currentEditor.uri.scheme === 'file') {
