@@ -13,7 +13,8 @@ function updateConfig() {
     useDecimal: configuration.get('useDecimal'),
     use24HourFormat: configuration.get('use24HourFormat'),
     showGzip: configuration.get('showGzip'),
-    showBrotli: configuration.get('showBrotli')
+    showBrotli: configuration.get('showBrotli'),
+    showGzipInStatusBar: configuration.get('showGzipInStatusBar')
   };
   updateStatusBarItem();
   return config;
@@ -23,6 +24,11 @@ function showStatusBarItem(newInfo) {
   info = fzCalculator.addPrettySize(newInfo, config);
   if (info && info.prettySize) {
     statusBarItem.text = info.prettySize;
+    if (config.showGzipInStatusBar) {
+      statusBarItem.text = `Min: ${info.prettySize}`;
+      info = fzCalculator.addGzipSize(info, config);
+      statusBarItem.text += ` | Gzip: ${info.gzipSize}`
+    }
     statusBarItem.show();
   }
 }
