@@ -1,6 +1,9 @@
 ## 3.0.0 - New features and fixes
 
-- D
+- Added brotli info in the detailed description.
+- Added option to show the status bar info on the right side.
+- Added extension bundling for faster loading.
+- Fixed incompatibility with VS Code 1.54+
 - Updated dependencies
 
 ## 2.1.4 - Updated dependencies
