@@ -26,7 +26,7 @@
   "activationEvents": [
     "*"
   ],
-  "main": "./extension",
+  "main": "./dist/extension",
   "contributes": {
     "commands": [
       {
@@ -80,20 +80,27 @@
     }
   },
   "scripts": {
+    "vscode:prepublish": "webpack --mode production",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
     "test": "node test/runTests.js"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
     "@types/mocha": "^8.2.1",
     "@types/node": "^14.14.33",
     "@types/vscode": "^1.54.0",
+    "babel-loader": "^8.2.2",
     "eslint": "^7.21.0",
     "glob": "^7.1.6",
     "mocha": "^8.3.1",
     "typescript": "^4.2.3",
-    "vscode-test": "^1.5.1"
+    "vscode-test": "^1.5.1",
+    "webpack": "^5.24.4",
+    "webpack-cli": "^4.5.0"
   },
   "dependencies": {
-    "filesize-calculator": "^3.3.0",
-    "vscode": "^1.1.37"
+    "filesize-calculator": "^3.3.0"
   }
 }
