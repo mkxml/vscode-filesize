@@ -101,6 +101,6 @@
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
-    "filesize-calculator": "^3.3.0"
+    "filesize-calculator": "^4.0.1"
   }
 }
