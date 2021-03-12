@@ -1,3 +1,8 @@
+## 3.1.0 - Reduced extension bundle
+
+- Update filesize-calculator to 4.0.1, using lighter dependencies
+- Faster extension loading.
+
 ## 3.0.0 - New features and fixes
 
 - Added brotli info in the detailed description.
