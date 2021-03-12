@@ -12,10 +12,16 @@ Or you can just search for `filesize` in the extension search bar inside the edi
 
 ## Screenshots
 
-`filesize` with the status bar component active:
+`filesize` with the status bar component active in simple view:
 
 ![status bar component](https://cldup.com/_Y52O-UfkK.jpg)
- 
+
+### **NEW!** Expanded view
+
+`filesize` with the status bar component active in expanded view (with gzip enabled):
+
+![status bar component](https://cldup.com/urhtudAVO3.jpg)
+
 ### Detailed view
 
 To open the detailed view for the current file in focus you can just click at the size in the status bar or use `Crtl`-`shift`-`'` or `Cmd`-`shift`-`'` if you are on a Mac.
@@ -32,6 +38,8 @@ This package has two user configurable settings:
 - `use24HourFormat`: set to `true` to use the 24-hour clock, set to `false` to use the 12-hour clock. Default is `true`.
 - `showGzip`: set to `true` to show calculated gzip size in the detailed info view. Default is `true`.
 - `showGzipInStatusBar`: set to `true` to show calculated gzip size in the status bar. Default is `false`.
+- `showBrotli`: set to `true` to show calculated brotli compressed size in the detailed info view. Default is `false`.
+- `displayInfoOnTheRightSideOfStatusBar`: set to `true` to show the status bar info on the right side. Default is `false` (left side).
 
 ## Contributing
 
