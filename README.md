@@ -40,6 +40,7 @@ This package has two user configurable settings:
 - `showGzipInStatusBar`: set to `true` to show calculated gzip size in the status bar. Default is `false`.
 - `showBrotli`: set to `true` to show calculated brotli compressed size in the detailed info view. Default is `false`.
 - `displayInfoOnTheRightSideOfStatusBar`: set to `true` to show the status bar info on the right side. Default is `false` (left side).
+- `showNumberOfLines`: set to `true` to show number of lines in the opened file. Default is `false`.
 
 ## Contributing
 

@@ -75,6 +75,11 @@
           "type": "boolean",
           "default": false,
           "description": "Defaults to false, whether to show the filesize info on the right side of the status bar."
+        },
+        "filesize.showNumberOfLines": {
+          "type": "boolean",
+          "default": false,
+          "description": "Defaults to false, whether to show number of lines in the opened file."
         }
       }
     }
