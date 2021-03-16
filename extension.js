@@ -18,7 +18,8 @@ function updateConfig() {
     showGzipInStatusBar: configuration.get('showGzipInStatusBar'),
     displayInfoOnTheRightSideOfStatusBar: configuration.get('displayInfoOnTheRightSideOfStatusBar'),
     showBrotli: configuration.get('showBrotli'),
-    showGzipInStatusBar: configuration.get('showGzipInStatusBar')
+    showGzipInStatusBar: configuration.get('showGzipInStatusBar'),
+    showNumberOfLines: configuration.get('showNumberOfLines')
   };
   updateStatusBarItem();
   return config;
@@ -32,6 +33,9 @@ function showStatusBarItem(newInfo) {
       statusBarItem.text = `Raw: ${info.prettySize}`;
       info = fzCalculator.addGzipSize(info, config);
       statusBarItem.text += ` | Gzip: ${info.gzipSize}`
+    }
+    if (config.showNumberOfLines) {
+      statusBarItem.text += ` | ${newInfo.lineCount}L`
     }
     statusBarItem.show();
   }
@@ -61,8 +65,11 @@ function updateStatusBarItem() {
   try {
     var currentEditor = window.activeTextEditor.document;
     if (currentEditor && currentEditor.uri.scheme === 'file') {
+      var fileInfo = fzCalculator.loadFileInfoSync(currentEditor.fileName);
+      fileInfo.lineCount = currentEditor.lineCount;
+
       hideDetailedInfo();
-      showStatusBarItem(fzCalculator.loadFileInfoSync(currentEditor.fileName));
+      showStatusBarItem(fileInfo);
     } else {
       if (currentEditor.uri.scheme !== 'output') hideStatusBarItem();
     }
