@@ -5,6 +5,8 @@ var fzCalculator = require('filesize-calculator');
 var window = vscode.window;
 var workspace = vscode.workspace;
 
+var cachedLocation = 'left';
+
 var statusBarItem, oc, info, config, isShowingDetailedInfo;
 
 function updateConfig() {
@@ -12,7 +14,11 @@ function updateConfig() {
   config = {
     useDecimal: configuration.get('useDecimal'),
     use24HourFormat: configuration.get('use24HourFormat'),
-    showGzip: configuration.get('showGzip')
+    showGzip: configuration.get('showGzip'),
+    showGzipInStatusBar: configuration.get('showGzipInStatusBar'),
+    displayInfoOnTheRightSideOfStatusBar: configuration.get('displayInfoOnTheRightSideOfStatusBar'),
+    showBrotli: configuration.get('showBrotli'),
+    showGzipInStatusBar: configuration.get('showGzipInStatusBar')
   };
   updateStatusBarItem();
   return config;
@@ -21,7 +27,12 @@ function updateConfig() {
 function showStatusBarItem(newInfo) {
   info = fzCalculator.addPrettySize(newInfo, config);
   if (info && info.prettySize) {
-    statusBarItem.text = info.prettySize + ' / ' + newInfo.lineCount + ' lines';
+    statusBarItem.text = info.prettySize;
+    if (config.showGzipInStatusBar) {
+      statusBarItem.text = `Raw: ${info.prettySize}`;
+      info = fzCalculator.addGzipSize(info, config);
+      statusBarItem.text += ` | Gzip: ${info.gzipSize}`
+    }
     statusBarItem.show();
   }
 }
@@ -34,14 +45,24 @@ function hideStatusBarItem() {
 
 // Update simple info in the status bar
 function updateStatusBarItem() {
+  // Check where to display the status bar
+  var location = config.displayInfoOnTheRightSideOfStatusBar ? 'right' : 'left';
+  // Set up statusBarItem
+  if (cachedLocation !== location) {
+    cachedLocation = location;
+    if (location === 'right') {
+      statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Right, 1);
+    } else {
+      statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
+    }
+    statusBarItem.command = 'extension.toggleFilesizeInfo';
+    statusBarItem.tooltip = 'Current file size - Click to toggle more info';
+  }
   try {
-    var currentEditor = window.activeTextEditor._documentData._document;
+    var currentEditor = window.activeTextEditor.document;
     if (currentEditor && currentEditor.uri.scheme === 'file') {
-      var fileInfo = fzCalculator.loadFileInfoSync(currentEditor.fileName);
-      fileInfo.lineCount = currentEditor.lineCount;
-
       hideDetailedInfo();
-      showStatusBarItem(fileInfo);
+      showStatusBarItem(fzCalculator.loadFileInfoSync(currentEditor.fileName));
     } else {
       if (currentEditor.uri.scheme !== 'output') hideStatusBarItem();
     }
@@ -54,11 +75,13 @@ function updateStatusBarItem() {
 function showDetailedInfo() {
   if (info && info.prettySize) {
     info = config.showGzip ? fzCalculator.addGzipSize(info, config) : info;
+    info = config.showBrotli ? fzCalculator.addBrotliSize(info, config) : info;
     info = fzCalculator.addMimeTypeInfo(info);
     info = fzCalculator.addPrettyDateInfo(info, config);
     const table = [];
     if (info.prettySize) table.push({ header: 'Size', content: info.prettySize });
     if (info.gzipSize) table.push({ header: 'Gzipped', content: info.gzipSize });
+    if (info.brotliSize) table.push({ header: 'Brotli', content: info.brotliSize });
     if (info.mimeType) table.push({ header: 'Mime type', content: info.mimeType });
     if (info.prettyDateCreated) table.push({ header: 'Created', content: info.prettyDateCreated });
     if (info.prettyDateChanged) table.push({ header: 'Changed', content: info.prettyDateChanged });

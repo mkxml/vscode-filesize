@@ -4,3 +4,6 @@ test/**
 .gitignore
 jsconfig.json
 .eslintrc.json
+extension.js
+view.js
+node_modules

@@ -2,7 +2,7 @@
   "name": "vscode-filesize",
   "displayName": "filesize",
   "description": "Show the current file size in the status bar",
-  "version": "2.1.1",
+  "version": "3.1.0",
   "icon": "icon.png",
   "publisher": "mkxml",
   "repository": {
@@ -18,7 +18,7 @@
   ],
   "license": "MIT",
   "engines": {
-    "vscode": "^1.5.0"
+    "vscode": "^1.54.0"
   },
   "categories": [
     "Other"
@@ -26,7 +26,7 @@
   "activationEvents": [
     "*"
   ],
-  "main": "./extension",
+  "main": "./dist/extension",
   "contributes": {
     "commands": [
       {
@@ -60,23 +60,47 @@
           "type": "boolean",
           "default": true,
           "description": "Defaults to true, whether to show gzip size in detailed view or not."
+        },
+        "filesize.showBrotli": {
+          "type": "boolean",
+          "default": false,
+          "description": "Defaults to false, whether to show brotli size in the status bar."
+        },
+        "filesize.showGzipInStatusBar": {
+          "type": "boolean",
+          "default": false,
+          "description": "Defaults to false, whether to show gzip size in the status bar."
+        },
+        "filesize.displayInfoOnTheRightSideOfStatusBar": {
+          "type": "boolean",
+          "default": false,
+          "description": "Defaults to false, whether to show the filesize info on the right side of the status bar."
         }
       }
     }
   },
   "scripts": {
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "node ./node_modules/vscode/bin/test"
+    "vscode:prepublish": "webpack --mode production",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "test": "node test/runTests.js"
   },
   "devDependencies": {
-    "typescript": "^2.9.2",
-    "vscode": "^1.1.18",
-    "mocha": "^5.2.0",
-    "eslint": "^5.0.1",
-    "@types/node": "^10.5.2",
-    "@types/mocha": "^5.2.4"
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@types/mocha": "^8.2.1",
+    "@types/node": "^14.14.34",
+    "@types/vscode": "^1.54.0",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.21.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.3.2",
+    "typescript": "^4.2.3",
+    "vscode-test": "^1.5.1",
+    "webpack": "^5.25.0",
+    "webpack-cli": "^4.5.0"
   },
   "dependencies": {
-    "filesize-calculator": "^3.1.2"
+    "filesize-calculator": "^4.0.1"
   }
 }
