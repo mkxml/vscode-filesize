@@ -109,8 +109,6 @@ function toggleDetailedInfo() {
 
 // Called when VS Code activates the extension
 function activate(context) {
-  console.log('filesize is active');
-
   // Set up statusBarItem
   statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
   statusBarItem.command = 'extension.toggleFilesizeInfo';
