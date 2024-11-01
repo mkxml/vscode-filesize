@@ -18,7 +18,7 @@ function updateConfig() {
     showBrotli: configuration.get('showBrotli'),
     showGzipInStatusBar: configuration.get('showGzipInStatusBar'),
     showBrotliInStatusBar: configuration.get('showBrotliInStatusBar'),
-    showBrotli: configuration.get('showBrotli'),
+    showRawInBytes: configuration.get('showRawInBytes'),
     showGzipInStatusBar: configuration.get('showGzipInStatusBar')
   };
   updateStatusBarItem();
@@ -88,6 +88,7 @@ function showDetailedInfo() {
     info = fzCalculator.addPrettyDateInfo(info, config);
     const table = [];
     if (info.prettySize) table.push({ header: 'Size', content: info.prettySize });
+    if (info.size && config.showRawInBytes) table.push({ header: 'Raw size', content: info.size + ' bytes' });
     if (info.gzipSize) table.push({ header: 'Gzipped', content: info.gzipSize });
     if (info.brotliSize) table.push({ header: 'Brotli', content: info.brotliSize });
     if (info.mimeType) table.push({ header: 'Mime type', content: info.mimeType });
