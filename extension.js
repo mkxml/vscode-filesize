@@ -15,6 +15,7 @@ function updateConfig() {
     useDecimal: configuration.get('useDecimal'),
     use24HourFormat: configuration.get('use24HourFormat'),
     showGzip: configuration.get('showGzip'),
+    showBrotli: configuration.get('showBrotli'),
     showGzipInStatusBar: configuration.get('showGzipInStatusBar'),
     showBrotliInStatusBar: configuration.get('showBrotliInStatusBar'),
     showBrotli: configuration.get('showBrotli'),
