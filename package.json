@@ -64,12 +64,22 @@
         "filesize.showBrotli": {
           "type": "boolean",
           "default": false,
-          "description": "Defaults to false, whether to show brotli size in the status bar."
+          "description": "Defaults to false, whether to show brotli size in the detailed view."
+        },
+        "filesize.showRawInBytes": {
+          "type": "boolean",
+          "default": false,
+          "description": "Defaults to false, whether to show raw size in bytes in the detailed view."
         },
         "filesize.showGzipInStatusBar": {
           "type": "boolean",
           "default": false,
           "description": "Defaults to false, whether to show gzip size in the status bar."
+        },
+        "filesize.showBrotliInStatusBar": {
+          "type": "boolean",
+          "default": false,
+          "description": "Defaults to false, whether to show brotli size in the status bar."
         },
         "filesize.displayInfoOnTheRightSideOfStatusBar": {
           "type": "boolean",
