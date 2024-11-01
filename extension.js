@@ -19,7 +19,7 @@ function updateConfig() {
     showGzipInStatusBar: configuration.get('showGzipInStatusBar'),
     showBrotliInStatusBar: configuration.get('showBrotliInStatusBar'),
     showRawInBytes: configuration.get('showRawInBytes'),
-    showGzipInStatusBar: configuration.get('showGzipInStatusBar')
+    displayInfoOnTheRightSideOfStatusBar: configuration.get('displayInfoOnTheRightSideOfStatusBar')
   };
   updateStatusBarItem();
   return config;
@@ -31,7 +31,7 @@ function showStatusBarItem(newInfo) {
     if (config.showGzipInStatusBar || config.showBrotliInStatusBar) {
       statusBarItem.text = `Raw: ${info.prettySize}`;
     } else {
-    statusBarItem.text = info.prettySize;
+      statusBarItem.text = info.prettySize;
     }
     if (config.showGzipInStatusBar) {
       info = fzCalculator.addGzipSize(info, config);
