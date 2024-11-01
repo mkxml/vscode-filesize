@@ -1,3 +1,7 @@
+## 3.2.1 - Keep vscode minimum version to 1.54.0
+
+- Keep supporting VSCode 1.54.0+
+
 ## 3.2.0 - A few updates and fixes
 
 - Added Support typescript file mime type.
