@@ -1,3 +1,12 @@
+## 3.2.0 - A few updates and fixes
+
+- Added Support typescript file mime type.
+- Updated filesize-calculator to 4.1.0.
+- Changed activation event to load the extension after VSCode is done loading.
+- Created show brotli option to show the size on the status bar.
+- Created show raw bytes option to show the total size in bytes inside the detailed view.
+
+
 ## 3.1.0 - Reduced extension bundle
 
 - Update filesize-calculator to 4.0.1, using lighter dependencies
