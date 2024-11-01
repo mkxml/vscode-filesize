@@ -96,21 +96,21 @@
     "test": "node test/runTests.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
-    "@types/mocha": "^8.2.1",
-    "@types/node": "^14.14.34",
-    "@types/vscode": "^1.54.0",
-    "babel-loader": "^8.2.2",
-    "eslint": "^7.21.0",
-    "glob": "^7.1.6",
-    "mocha": "^8.3.2",
-    "typescript": "^4.2.3",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@types/mocha": "^10.0.9",
+    "@types/node": "^22.8.6",
+    "@types/vscode": "^1.95.0",
+    "babel-loader": "^9.2.1",
+    "eslint": "^8.2.0",
+    "glob": "^11.0.0",
+    "mocha": "^10.8.2",
+    "typescript": "^5.6.3",
     "vscode-test": "^1.5.1",
-    "webpack": "^5.25.0",
-    "webpack-cli": "^4.5.0"
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "filesize-calculator": "^4.0.1"
+    "filesize-calculator": "^4.1.0"
   }
 }
