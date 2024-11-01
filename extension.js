@@ -16,7 +16,7 @@ function updateConfig() {
     use24HourFormat: configuration.get('use24HourFormat'),
     showGzip: configuration.get('showGzip'),
     showGzipInStatusBar: configuration.get('showGzipInStatusBar'),
-    displayInfoOnTheRightSideOfStatusBar: configuration.get('displayInfoOnTheRightSideOfStatusBar'),
+    showBrotliInStatusBar: configuration.get('showBrotliInStatusBar'),
     showBrotli: configuration.get('showBrotli'),
     showGzipInStatusBar: configuration.get('showGzipInStatusBar')
   };
@@ -27,11 +27,18 @@ function updateConfig() {
 function showStatusBarItem(newInfo) {
   info = fzCalculator.addPrettySize(newInfo, config);
   if (info && info.prettySize) {
-    statusBarItem.text = info.prettySize;
-    if (config.showGzipInStatusBar) {
+    if (config.showGzipInStatusBar || config.showBrotliInStatusBar) {
       statusBarItem.text = `Raw: ${info.prettySize}`;
+    } else {
+    statusBarItem.text = info.prettySize;
+    }
+    if (config.showGzipInStatusBar) {
       info = fzCalculator.addGzipSize(info, config);
-      statusBarItem.text += ` | Gzip: ${info.gzipSize}`
+      statusBarItem.text += ` | Gz: ${info.gzipSize}`;
+    }
+    if (config.showBrotliInStatusBar) {
+      info = fzCalculator.addBrotliSize(info, config);
+      statusBarItem.text += ` | Br: ${info.brotliSize}`;
     }
     statusBarItem.show();
   }
