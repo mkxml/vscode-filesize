@@ -27,6 +27,9 @@
     "onStartupFinished"
   ],
   "main": "./dist/extension",
+  "extensionKind": [
+    "workspace"
+  ],
   "contributes": {
     "commands": [
       {
