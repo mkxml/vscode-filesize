@@ -2,7 +2,7 @@
   "name": "vscode-filesize",
   "displayName": "filesize",
   "description": "Show the current file size in the status bar",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "icon": "icon.png",
   "publisher": "mkxml",
   "repository": {
