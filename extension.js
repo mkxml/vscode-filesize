@@ -148,18 +148,23 @@ function activate(context) {
 
 // Called when VS Code deactivates the extension
 function deactivate() {
-  if (oc) {
-    oc.clear();
-    oc.dispose();
+  try {
+    if (oc) {
+      oc.clear();
+      oc.dispose();
+    }
+    if (statusBarItem) {
+      statusBarItem.hide();
+      statusBarItem.dispose();
+    }
+    oc = null;
+    statusBarItem = null;
+    config = null;
+    info = null;
+  } catch(e) {
+    console.log('Error disposing filesize disposable when deactivating');
   }
-  if (statusBarItem) {
-    statusBarItem.hide();
-    statusBarItem.dispose();
-  }
-  oc = null;
-  statusBarItem = null;
-  config = null;
-  info = null;
+  return undefined;
 }
 
 module.exports = {
