@@ -34,12 +34,12 @@ To open the detailed view for the current file in focus you can just click at th
 
 This package has the following user-configurable settings:
 
-- `useDecimal`: set to `true` if you want your size data to be displayed according to the [SI unit system](https://en.wikipedia.org/wiki/International_System_of_Units) or leave it at `false` to use [IEC's](https://en.wikipedia.org/wiki/Binary_prefix) format (default).
-- `use24HourFormat`: set to `true` to use the 24-hour clock, set to `false` to use the 12-hour clock. Default is `true`.
+- `displayInfoOnTheRightSideOfStatusBar`: set to `true` to show the status bar info on the right side. Default is `false` (left side).
+- `showBrotli`: set to `true` to show calculated brotli compressed size in the detailed info view. Default is `false`.
 - `showGzip`: set to `true` to show calculated gzip size in the detailed info view. Default is `true`.
 - `showGzipInStatusBar`: set to `true` to show calculated gzip size in the status bar. Default is `false`.
-- `showBrotli`: set to `true` to show calculated brotli compressed size in the detailed info view. Default is `false`.
-- `displayInfoOnTheRightSideOfStatusBar`: set to `true` to show the status bar info on the right side. Default is `false` (left side).
+- `use24HourFormat`: set to `true` to use the 24-hour clock, set to `false` to use the 12-hour clock. Default is `true`.
+- `useDecimal`: set to `true` if you want your size data to be displayed according to the [SI unit system](https://en.wikipedia.org/wiki/International_System_of_Units) or leave it at `false` to use [IEC's](https://en.wikipedia.org/wiki/Binary_prefix) format (default).
 
 ## Contributing
 
