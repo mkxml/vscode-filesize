@@ -9,6 +9,8 @@ var cachedLocation = 'left';
 
 var statusBarItem, oc, info, config, isShowingDetailedInfo;
 
+var lastUri = '';
+
 function updateConfig() {
   var configuration = workspace.getConfiguration('filesize');
   config = {
@@ -66,17 +68,38 @@ function updateStatusBarItem() {
     statusBarItem.command = 'extension.toggleFilesizeInfo';
     statusBarItem.tooltip = 'Current file size - Click to toggle more info';
   }
+  var currentUri = getActiveUri();
+  lastUri = currentUri ? currentUri.toString() : '';
   try {
-    var currentEditor = window.activeTextEditor.document;
-    if (currentEditor && currentEditor.uri.scheme === 'file') {
+    if (currentUri && currentUri.scheme === 'file') {
       hideDetailedInfo();
-      showStatusBarItem(fzCalculator.loadFileInfoSync(currentEditor.fileName));
+      showStatusBarItem(fzCalculator.loadFileInfoSync(currentUri.fsPath));
     } else {
-      if (currentEditor.uri.scheme !== 'output') hideStatusBarItem();
+      if (!currentUri || currentUri.scheme !== 'output') hideStatusBarItem();
     }
   } catch (e) {
     hideStatusBarItem();
   }
+}
+
+// Get the URI of the active editor
+function getActiveUri() {
+  var editor = window.activeTextEditor;
+  // Keep the output panel so the detailed info stays open
+  if (editor && editor.document.uri.scheme === 'output') return editor.document.uri;
+  // Tabs API needs VSCode 1.67.0
+  if (window.tabGroups) {
+    var activeTab = window.tabGroups.activeTabGroup.activeTab;
+    var input = activeTab && activeTab.input;
+    if (input && input.uri) return input.uri;
+  }
+  return editor ? editor.document.uri : undefined;
+}
+
+// Only update when the file in focus changed
+function onTabsChanged() {
+  var currentUri = getActiveUri();
+  if ((currentUri ? currentUri.toString() : '') !== lastUri) updateStatusBarItem();
 }
 
 // Show detailed filesize info in the OC
@@ -141,6 +164,18 @@ function activate(context) {
   context.subscriptions.push(onChangeConfig);
   context.subscriptions.push(onActiveEditorChanged);
   context.subscriptions.push(command);
+
+  if (window.tabGroups) {
+    context.subscriptions.push(window.tabGroups.onDidChangeTabs(onTabsChanged));
+    context.subscriptions.push(window.tabGroups.onDidChangeTabGroups(onTabsChanged));
+    // Refresh file size for non-text editors when the window regains focus
+    context.subscriptions.push(window.onDidChangeWindowState(function (state) {
+      if (state.focused && !window.activeTextEditor) updateStatusBarItem();
+    }));
+  }
+  if (workspace.onDidSaveNotebookDocument) {
+    context.subscriptions.push(workspace.onDidSaveNotebookDocument(updateStatusBarItem));
+  }
 
   // Set default config
   updateConfig();
